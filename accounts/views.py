@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
 def home(request):
-    return HttpResponse('Sample!@')
+    return render(request, "accounts/dashboard.html")
