@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+
 class Customer(models.Model):
     name = models.CharField(max_length=20, null=True)
     email = models.CharField(max_length=20, null=True)
@@ -9,12 +10,12 @@ class Customer(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
 
 class Product(models.Model):
     CATEGORY = (
-        ('Indoor', 'Indoor'),
-        ('Outdoor', 'Outdoor'),
+        ("Indoor", "Indoor"),
+        ("Outdoor", "Outdoor"),
     )
     name = models.CharField(max_length=20, null=True)
     price = models.FloatField(null=True)
@@ -25,3 +26,12 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
+class Order(models.Model):
+    STATUS = (
+        ("Pending", "Pending"),
+        ("Out for Delivery", "Out for Delivery"),
+        ("Delivered", "Delivered"),
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, null=True, choices=STATUS)
