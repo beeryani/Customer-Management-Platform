@@ -4,7 +4,10 @@ from .models import *
 
 
 def home(request):
-    return render(request, "accounts/dashboard.html")
+    customers = Customer.objects.all().order_by('-date_created')[:10]
+    orders = Order.objects.all()
+    data = {'customers': customers, 'orders': orders}
+    return render(request, "accounts/dashboard.html", data)
 
 
 def products(request):

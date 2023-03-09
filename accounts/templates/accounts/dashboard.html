@@ -16,10 +16,15 @@ Dashboard
             <a href="" class="btn btn-primary btn-sm btn-block">Create Customer</a>
             <table class="table table-sm">
                 <tr>
-                    <th></th>
-                    <th>Customer</th>
-                    <th>Order</th>
+                    <th>Customer Name</th>
+                    <th>Contact Information</th>
                 </tr>
+                {% for customer in customers  %}
+                    <tr>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.phone_number}}</td>
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
