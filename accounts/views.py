@@ -90,3 +90,13 @@ def updateCustomer(request, pk):
 
     context = {"form": form}
     return render(request, "accounts/customer_form.html", context)
+
+
+def deleteCustomer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    if request.method == "POST":
+        customer.delete()
+        return redirect("/")
+
+    context = {"customer_id": customer}
+    return render(request, "accounts/delete_customer.html", context)

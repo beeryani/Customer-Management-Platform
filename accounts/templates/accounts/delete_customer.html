@@ -1,0 +1,18 @@
+{% extends 'accounts/main.html' %}
+{% block title %}
+Delete Order
+</title>    
+{% endblock %}
+
+{% block content %}
+
+<p>Are your sure you want to delete the order of {{order.product}} ?</p>
+<div class = "card card-body">
+    <form action="{% url 'delete_customer' customer_id.id%}" method="POST">
+        {% csrf_token %}
+        <a class="btn btn-info" href="{% url 'home' %}">Cancel</a>
+        <input class ="btn btn-danger" type="submit" value="Confirm">
+    </form>
+</div>
+
+{% endblock %}
