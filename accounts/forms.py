@@ -13,3 +13,9 @@ class UpdateOrderForm(ModelForm):
     class Meta:
         model = Order
         fields = ["status"]
+
+
+class UpdateCustomerForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = "__all__"
