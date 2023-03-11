@@ -2,7 +2,7 @@ alabaster==0.7.12
 asgiref==3.5.2
 astroid==2.12.11
 Babel==2.10.3
-black @ git+https://github.com/psf/black@b60b85b234d6a575f636d0a125478115f993c90c
+black==23.1.0
 bleach==6.0.0
 certifi==2022.9.24
 charset-normalizer==2.1.1
@@ -29,7 +29,7 @@ Markdown==3.4.1
 MarkupSafe==2.1.1
 mccabe==0.7.0
 mypy-extensions==0.4.3
-packaging==21.3
+packaging==23.0
 pathspec==0.10.1
 Pillow==9.4.0
 platformdirs==2.5.2

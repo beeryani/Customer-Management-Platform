@@ -1,5 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
+from .forms import *
 from .models import *
 
 
@@ -37,3 +39,16 @@ def customer(request, pk):
         "products": products_orders,
     }
     return render(request, "accounts/customer.html", data)
+
+
+def createOrder(request):
+    form = OrderForm()
+
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+
+    context = {"form": form}
+    return render(request, "accounts/order_form.html", context)
