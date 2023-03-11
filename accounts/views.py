@@ -78,12 +78,25 @@ def deleteOrder(request, pk):
     return render(request, "accounts/delete_order.html", context)
 
 
-def updateCustomer(request, pk):
-    customer = Customer.objects.get(id=pk)
-    form = UpdateCustomerForm(instance=customer)
+def createCustomer(request):
+    form = CustomerForm()
 
     if request.method == "POST":
-        form = UpdateCustomerForm(request.POST, instance=customer)
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+
+    context = {"form": form}
+    return render(request, "accounts/customer_form.html", context)
+
+
+def updateCustomer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    form = CustomerForm(instance=customer)
+
+    if request.method == "POST":
+        form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():
             form.save()
             return redirect("/")
