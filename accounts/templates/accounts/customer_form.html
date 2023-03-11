@@ -1,0 +1,14 @@
+{% extends 'accounts/main.html' %} {% load static %} 
+{% block title %}
+Order
+</title>    
+{% endblock %}
+{% block content %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Submit">
+</form>
+
+{% endblock %}

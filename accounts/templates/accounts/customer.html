@@ -8,10 +8,13 @@ Customer
 <div class="row">
     <div class="col-md">
         <div class="card card-body">
-            <h5>Customer:</h5>
+            <h5>Customer: {{customer_id.name}}</h5>
             <hr>
-            <a href="" class="btn btn-outline-info btn-sm btn-block">Update Customer</a>
-            <a href="" class="btn btn-outline-danger btn-sm btn-block">Delete Customer</a>
+            <a href="{% url 'update_customer' customer_id.id %}" class="btn btn-info btn-sm btn-block">Update Customer</a>
+            <br>    
+            <a href="" class="btn btn-info btn-sm btn-block">Place Order</a>
+            <br>
+            <a href="" class="btn btn-danger btn-sm btn-block">Delete Customer</a>
         </div>
     </div>
 
