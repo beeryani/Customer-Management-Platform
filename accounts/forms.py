@@ -7,3 +7,9 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = "__all__"
+
+
+class UpdareOrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ["status"]
