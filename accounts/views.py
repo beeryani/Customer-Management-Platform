@@ -31,5 +31,9 @@ def customer(request, pk):
     products_orders = Order.objects.filter(customer=customer_id)
     no_orders = products_orders.count()
 
-    data = {"customer_id": customer_id, "orders": no_orders, "products": products_orders}
+    data = {
+        "customer_id": customer_id,
+        "orders": no_orders,
+        "products": products_orders,
+    }
     return render(request, "accounts/customer.html", data)
