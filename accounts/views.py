@@ -56,13 +56,23 @@ def createOrder(request):
 
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
-    form = UpdareOrderForm(instance=order)
+    form = UpdateOrderForm(instance=order)
 
     if request.method == "POST":
-        form = UpdareOrderForm(request.POST, instance=order)
+        form = UpdateOrderForm(request.POST, instance=order)
         if form.is_valid():
             form.save()
             return redirect("/")
 
     context = {"form": form}
     return render(request, "accounts/order_form.html", context)
+
+
+def deleteOrder(request, pk):
+    order = Order.objects.get(id=pk)
+    if request.method == "POST":
+        order.delete()
+        return redirect("/")
+
+    context = {"order": order}
+    return render(request, "accounts/delete_order.html", context)

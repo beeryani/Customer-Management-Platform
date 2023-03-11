@@ -1,5 +1,6 @@
-from django.db import models
 from datetime import datetime
+
+from django.db import models
 
 
 class Customer(models.Model):
@@ -45,3 +46,6 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, null=True, choices=STATUS)
+
+    def __str__(self) -> str:
+        return self.product.name
