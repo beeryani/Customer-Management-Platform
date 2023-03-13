@@ -12,7 +12,7 @@ Customer
             <hr>
             <a href="{% url 'update_customer' customer_id.id %}" class="btn btn-info btn-sm btn-block">Update Customer</a>
             <br>    
-            <a href="" class="btn btn-info btn-sm btn-block">Place Order</a>
+            <a href= "{% url 'create_order' customer_id.id %}" class="btn btn-info btn-sm btn-block">Place Order</a>
             <br>
             <a class="btn btn-sm btn-danger" href="{%  url 'delete_customer' customer_id.id %}">Delete Customer</a>
         </div>
