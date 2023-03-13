@@ -1,3 +1,4 @@
+from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -42,16 +43,17 @@ def customer(request, pk):
 
 
 def createOrder(request, pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=("product", "status"))
     customer = Customer.objects.get(id=pk)
-    form = OrderForm(initial={"customer": customer})
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
 
     if request.method == "POST":
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
             return redirect("/")
 
-    context = {"form": form}
+    context = {"form": formset}
     return render(request, "accounts/order_form.html", context)
 
 

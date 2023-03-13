@@ -7,7 +7,10 @@ Order
 
 <form method="POST" action="">
     {% csrf_token %}
-    {{form}}
+    {% for f in form %}
+        {{ f }}
+        <br>
+    {% endfor %}
     <input type="submit" name="Submit">
 </form>
 
