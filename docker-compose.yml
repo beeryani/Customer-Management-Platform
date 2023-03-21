@@ -1,0 +1,26 @@
+version: '3.8'
+volumes:
+  postgres_data:
+
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    container_name: django-customer-management
+    depends_on:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000 --settings=project_customer.local
+  db:
+    image: postgres:13.0-alpine
+    ports:
+      - "5482:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER="${SQL_USER}"
+      - POSTGRES_PASSWORD="${SQL_PASSWORD}"
+      - POSTGRES_DB="${SQL_DATABASE}"
