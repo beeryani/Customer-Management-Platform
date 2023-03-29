@@ -1,10 +1,9 @@
 from django.forms import inlineformset_factory
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from .filters import *
-from .forms import *
-from .models import *
+from .filters import OrderFilter
+from .forms import CustomerForm, UpdateOrderForm
+from .models import Customer, Order, Product
 
 
 def home(request):
