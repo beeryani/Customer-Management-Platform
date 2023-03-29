@@ -63,9 +63,13 @@ The Customer Management Platform in the mentioned repository is a web applicatio
 
 The Customer Management Platform in the mentioned repository is built using the following technologies:
 
-1. Frontend: The platform's frontend is built using HTML, CSS, and JavaScript. It uses Bootstrap framework for styling.
-
-2. Backend: The platform's backend is built
+1. Python programming language
+2. Django web framework
+3. HTML, CSS, and JavaScript for front-end development
+4. Bootstrap CSS framework for styling
+5. PostgreSQL database for data storage
+6. Django's built-in authentication system for user management
+7. Docker for virtualisation and container management
 
 ### Security:
 
