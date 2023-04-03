@@ -9,7 +9,7 @@ Customer
 <div class="row">
     <div class="col-md">
         <div class="card card-body">
-            <h5>Customer: {{customer_id.name}}</h5>
+            <h5>Customer: {{customer.name}}</h5>
         </div>
     </div>
 
@@ -17,8 +17,8 @@ Customer
         <div class="card card-body">
             <h5>Contact Information</h5>
             <hr>
-            <p>Email: {{customer_id.email}}</p>
-            <p>Phone: {{customer_id.phone_number}}</p>
+            <p>Email: {{customer.email}}</p>
+            <p>Phone: {{customer.phone_number}}</p>
         </div>
     </div>
 
@@ -53,7 +53,7 @@ Customer
                     <th>Date Ordered</th>
                     <th>Status</th>
                 </tr>
-                {% for product in products %}
+                {% for product in user_orders %}
                     <tr>
                         <th>{{product.product}}</th>
                         <th>{{product.product.category}}</th>

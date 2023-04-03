@@ -191,12 +191,14 @@ def logoutUser(request):
 @login_required(login_url="login")
 @allowed_users(allowed_users=["customer"])
 def userView(request, user_orders=None):
+    customer_info = request.user.customer
     user_orders = request.user.customer.order_set.all()
     orders_total = user_orders.count()
     orders_delivered = user_orders.filter(status="Delivered").count()
     orders_pending = user_orders.filter(status="Pending").count()
 
     context = {
+        "customer": customer_info,
         "user_orders": user_orders,
         "orders_total": orders_total,
         "orders_delivered": orders_delivered,

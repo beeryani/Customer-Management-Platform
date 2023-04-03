@@ -1,7 +1,7 @@
 {% extends 'accounts/main.html' %}
 {% block title %}
 Customer
-</title>    
+</title>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@ Customer
             <h5>Customer: {{customer_id.name}}</h5>
             <hr>
             <a href="{% url 'update_customer' customer_id.id %}" class="btn btn-info btn-sm btn-block">Update Customer</a>
-            <br>    
+            <br>
             <a href= "{% url 'create_order' customer_id.id %}" class="btn btn-info btn-sm btn-block">Place Order</a>
             <br>
             <a class="btn btn-sm btn-danger" href="{%  url 'delete_customer' customer_id.id %}">Delete Customer</a>
@@ -66,8 +66,8 @@ Customer
                         <th>{{product.product.category}}</th>
                         <th>{{product.date_created}}</th>
                         <th>{{product.status}}</th>
-                        <td><a class="btn btn-sm btn-info" href="{% url 'update_order' product.id %}">Update</a></td> 
-                        <td><a class="btn btn-sm btn-danger" href="{%  url 'delete_order' product.id %}">Delete</a></td> 
+                        <td><a class="btn btn-sm btn-info" href="{% url 'update_order' product.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{%  url 'delete_order' product.id %}">Delete</a></td>
                     </tr>
                 {% endfor %}
             </table>
