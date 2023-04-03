@@ -1,5 +1,4 @@
 from django.shortcuts import redirect
-from django.http import HttpResponse
 
 
 def unauthenticated_user(view_function):
@@ -21,7 +20,7 @@ def allowed_users(allowed_users=[]):
             if group in allowed_users:
                 return view_function(request, *args, **kwargs)
             else:
-                return HttpResponse("You are nothing but a cutie")
+                return redirect("user-page")
 
         return wrapper_function
 

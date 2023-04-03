@@ -188,6 +188,18 @@ def logoutUser(request):
     return redirect("../login/")
 
 
-def userView(request):
-    context = {}
+@login_required(login_url="login")
+@allowed_users(allowed_users=["customer"])
+def userView(request, user_orders=None):
+    user_orders = request.user.customer.order_set.all()
+    orders_total = user_orders.count()
+    orders_delivered = user_orders.filter(status="Delivered").count()
+    orders_pending = user_orders.filter(status="Pending").count()
+
+    context = {
+        "user_orders": user_orders,
+        "orders_total": orders_total,
+        "orders_delivered": orders_delivered,
+        "orders_pending": orders_pending,
+    }
     return render(request, "accounts/user.html", context)

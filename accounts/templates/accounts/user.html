@@ -6,5 +6,64 @@ Customer
 
 {% block content %}
 {% include 'accounts/status.html' %}
-    <h3>test profile</h3>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Customer: {{customer_id.name}}</h5>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <hr>
+            <p>Email: {{customer_id.email}}</p>
+            <p>Phone: {{customer_id.phone_number}}</p>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Total Orders</h5>
+            <hr>
+            <h1 style="text-align: center; padding: 10px;">{{orders_total}}</h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form action="" method="get">
+                {{order_filter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="class">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                </tr>
+                {% for product in products %}
+                    <tr>
+                        <th>{{product.product}}</th>
+                        <th>{{product.product.category}}</th>
+                        <th>{{product.date_created}}</th>
+                        <th>{{product.status}}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>
 {% endblock content %}
