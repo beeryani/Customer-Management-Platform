@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 
 from .filters import OrderFilter
 from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
@@ -170,7 +171,9 @@ def registerUser(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.get("username")
+            user.groups.add(group)
             messages.success(
                 request, "Account was created " + request.POST.get("username", " ")
             )
