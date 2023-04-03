@@ -19,6 +19,7 @@ class Tag(models.Model):
 
 
 class Product(models.Model):
+    objects = None
     CATEGORY = (
         ("Indoor", "Indoor"),
         ("Outdoor", "Outdoor"),

@@ -29,11 +29,13 @@ def home(request):
     return render(request, "accounts/dashboard.html", data)
 
 
+@login_required(login_url="login")
 def products(request):
     products = Product.objects.all()
     return render(request, "accounts/products.html", {"products": products})
 
 
+@login_required(login_url="login")
 def customer(request, pk):
     customer_id = Customer.objects.get(id=pk)
     products_orders = Order.objects.filter(customer=customer_id)
@@ -51,6 +53,7 @@ def customer(request, pk):
     return render(request, "accounts/customer.html", data)
 
 
+@login_required(login_url="login")
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=("product", "status"))
     customer = Customer.objects.get(id=pk)
@@ -66,6 +69,7 @@ def createOrder(request, pk):
     return render(request, "accounts/order_form.html", context)
 
 
+@login_required(login_url="login")
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
     form = UpdateOrderForm(instance=order)
@@ -80,6 +84,7 @@ def updateOrder(request, pk):
     return render(request, "accounts/order_form.html", context)
 
 
+@login_required(login_url="login")
 def deleteOrder(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == "POST":
@@ -90,6 +95,7 @@ def deleteOrder(request, pk):
     return render(request, "accounts/delete_order.html", context)
 
 
+@login_required(login_url="login")
 def createCustomer(request):
     form = CustomerForm()
 
@@ -103,6 +109,7 @@ def createCustomer(request):
     return render(request, "accounts/customer_form.html", context)
 
 
+@login_required(login_url="login")
 def updateCustomer(request, pk):
     customer = Customer.objects.get(id=pk)
     form = CustomerForm(instance=customer)
@@ -169,3 +176,8 @@ def registerUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("../login/")
+
+
+def userView(request):
+    context = {}
+    return render(request, "accounts/user.html", context)
