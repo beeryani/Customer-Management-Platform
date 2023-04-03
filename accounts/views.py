@@ -1,9 +1,8 @@
 from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
 
 from .filters import OrderFilter
-from .forms import CustomerForm, UpdateOrderForm
+from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
 from .models import Customer, Order, Product
 
 
@@ -129,11 +128,11 @@ def loginUser(request):
 
 
 def registerUser(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
     context = {"form": form}
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
     return render(request, "accounts/register.html", context)
