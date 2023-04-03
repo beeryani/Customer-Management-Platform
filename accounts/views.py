@@ -8,11 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from .filters import OrderFilter
 from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
 from .models import Customer, Order, Product
-from .decorators import unauthenticated_user, allowed_users
+from .decorators import unauthenticated_user, allowed_users, allow_admin_user
 
 
 @login_required(login_url="login")
-@allowed_users(allowed_users=["admin"])
+@allow_admin_user
 def home(request):
     customers = Customer.objects.all().order_by("-date_created")[:10]
     orders = Order.objects.all()
