@@ -2,6 +2,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
 from .filters import OrderFilter
@@ -9,6 +10,7 @@ from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
 from .models import Customer, Order, Product
 
 
+@login_required(login_url="login")
 def home(request):
     customers = Customer.objects.all().order_by("-date_created")[:10]
     orders = Order.objects.all()
@@ -126,36 +128,42 @@ def deleteCustomer(request, pk):
 
 
 def loginUser(request):
-    context = {}
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        context = {}
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect("../")
-        else:
-            messages.info(request, "User or Password is incorrect")
-            return render(request, "accounts/login.html", context)
+            if user is not None:
+                login(request, user)
+                return redirect("../")
+            else:
+                messages.info(request, "User or Password is incorrect")
+                return render(request, "accounts/login.html", context)
 
-    return render(request, "accounts/login.html", context)
+        return render(request, "accounts/login.html", context)
 
 
 def registerUser(request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect("home")
+    else:
+        form = CreateUserForm()
 
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, "Account was created " + request.POST.get("username", " ")
-            )
-            return redirect("../login")
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request, "Account was created " + request.POST.get("username", " ")
+                )
+                return redirect("../login")
 
-    context = {"form": form}
-    return render(request, "accounts/register.html", context)
+        context = {"form": form}
+        return render(request, "accounts/register.html", context)
 
 
 def logoutUser(request):
