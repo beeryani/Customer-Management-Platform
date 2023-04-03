@@ -8,10 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from .filters import OrderFilter
 from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
 from .models import Customer, Order, Product
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def home(request):
     customers = Customer.objects.all().order_by("-date_created")[:10]
     orders = Order.objects.all()
@@ -31,12 +32,14 @@ def home(request):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def products(request):
     products = Product.objects.all()
     return render(request, "accounts/products.html", {"products": products})
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def customer(request, pk):
     customer_id = Customer.objects.get(id=pk)
     products_orders = Order.objects.filter(customer=customer_id)
@@ -55,6 +58,7 @@ def customer(request, pk):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=("product", "status"))
     customer = Customer.objects.get(id=pk)
@@ -71,6 +75,7 @@ def createOrder(request, pk):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
     form = UpdateOrderForm(instance=order)
@@ -86,6 +91,7 @@ def updateOrder(request, pk):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def deleteOrder(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == "POST":
@@ -97,6 +103,7 @@ def deleteOrder(request, pk):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def createCustomer(request):
     form = CustomerForm()
 
@@ -111,6 +118,7 @@ def createCustomer(request):
 
 
 @login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def updateCustomer(request, pk):
     customer = Customer.objects.get(id=pk)
     form = CustomerForm(instance=customer)
@@ -125,6 +133,8 @@ def updateCustomer(request, pk):
     return render(request, "accounts/customer_form.html", context)
 
 
+@login_required(login_url="login")
+@allowed_users(allowed_users=["admin"])
 def deleteCustomer(request, pk):
     customer = Customer.objects.get(id=pk)
     if request.method == "POST":
