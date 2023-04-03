@@ -1,4 +1,4 @@
-django-env
+virtual_env_customer_management
 __pycache__
 db.sqlite3
 blog_project/settings.py

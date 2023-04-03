@@ -120,3 +120,13 @@ def deleteCustomer(request, pk):
 
     context = {"customer_id": customer}
     return render(request, "accounts/delete_customer.html", context)
+
+
+def login(request):
+    context = {}
+    return render(request, "accounts/login.html", context)
+
+
+def register(request):
+    context = {}
+    return render(request, "accounts/register.html", context)
