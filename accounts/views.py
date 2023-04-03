@@ -172,11 +172,18 @@ def registerUser(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get("username")
+            username = form.cleaned_data.get("username")
+
+            group = Group.objects.get(name="customer")
             user.groups.add(group)
-            messages.success(
-                request, "Account was created " + request.POST.get("username", " ")
+            Customer.objects.create(
+                user=user,
+                name=username,
+                email=form.cleaned_data.get("email"),
+                phone_number=form.cleaned_data.get("phone_number"),
             )
+
+            messages.success(request, "Account was created " + username)
             return redirect("../login")
 
     context = {"form": form}
