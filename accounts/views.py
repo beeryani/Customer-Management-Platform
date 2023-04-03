@@ -2,7 +2,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from .filters import OrderFilter
 from .forms import CustomerForm, UpdateOrderForm, CreateUserForm
@@ -156,3 +156,8 @@ def registerUser(request):
 
     context = {"form": form}
     return render(request, "accounts/register.html", context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect("../login/")

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<style>
+  .hello-msg{
+    font-size: 18px;
+    color: #808080;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">PUPPER BOARD</a>
   <button
@@ -22,4 +29,10 @@
       </li>
     </ul>
   </div>
+
+  <span class="hello-msg">Hello , {{request.user}}</span>&nbsp;
+  &nbsp;
+  <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+  &nbsp;
+  &nbsp;
 </nav>
