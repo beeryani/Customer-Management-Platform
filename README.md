@@ -83,5 +83,6 @@ To ensure the security of the platform, the following measures should be taken:
 
 ## #TO DO
 
-1. Add authentication as next step
+1. ~~Add authentication as next step~~
 2. Add production docker compose file with neccessary attachments for production environment
+3. Add Signals for email notification
