@@ -197,6 +197,21 @@ def logoutUser(request):
 
 @login_required(login_url="login")
 @allowed_users(allowed_users=["customer"])
+def accountSettings(request):
+    customer_info = request.user.customer
+    form = CustomerForm(instance=customer_info)
+
+    if request.method == "POST":
+        form = CustomerForm(request.POST, request.FILES, instance=customer_info)
+        if form.is_valid():
+            form.save()
+
+    context = {"form": form}
+    return render(request, "accounts/account_settings.html", context)
+
+
+@login_required(login_url="login")
+@allowed_users(allowed_users=["customer"])
 def userView(request, user_orders=None):
     customer_info = request.user.customer
     user_orders = request.user.customer.order_set.all()

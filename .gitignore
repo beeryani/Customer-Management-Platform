@@ -3,6 +3,7 @@ __pycache__
 db.sqlite3
 blog_project/settings.py
 
+*.jpeg
 .DS_STORE
 node_modules
 scripts/flow/*/.flowconfig
